@@ -1,0 +1,16 @@
+{
+  "name": "awesome_documentation",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/parser": "^7.7.7",
+    "@babel/traverse": "^7.7.4"
+  },
+  "scripts": {
+    "parse": "node src/parsing/parse.js"
+  },
+  "author": "Morten Henriksen Birk",
+  "license": "MIT"
+}
