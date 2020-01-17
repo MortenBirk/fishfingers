@@ -1,4 +1,4 @@
-import exported from './index'
+import { exported } from './index'
 
 export const exportedExample = () => ({
   example: () => {

@@ -61,12 +61,30 @@
 /**
 * Hi I am exported
 * 
-* I wonder what will happen if i am exported directly. Parsing might fail hard!
+* I am a named exported constant
 * @param {number} lol This is lol
 * @returns {string} Awesome
 */
-const exported = (lol) => {
+export const exported = (lol) => {
   return 'The number is ' + lol
 }
 
-export default exported
+
+/**
+* Hi I am exported
+* 
+* I an exported function
+* @param {string} lolz This is lol
+* @returns {string} Awesome
+*/
+export function exportedFunc(lolz) {
+  return 'The number is ' + lolz
+}
+
+
+/**
+ * This is default exported
+ */
+export default function ok() {
+  return 'ok'
+}
