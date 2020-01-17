@@ -56,3 +56,17 @@
     return 5
    }
  }
+
+
+/**
+* Hi I am exported
+* 
+* I wonder what will happen if i am exported directly. Parsing might fail hard!
+* @param {number} lol This is lol
+* @returns {string} Awesome
+*/
+const exported = (lol) => {
+  return 'The number is ' + lol
+}
+
+export default exported
