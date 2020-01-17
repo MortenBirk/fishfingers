@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import Typography from '@material-ui/core/Typography';
+import FunctionExample from './FunctionExample'
 import Prism from "prismjs";
 import '../../css/prism.css'
 
-const Story = ({ name, description, example }) => {
+const OldExample = ({ name, description, example }) => {
   return (
     <Fragment>
       <Typography  variant='h2' paragraph>
@@ -26,9 +27,21 @@ const Story = ({ name, description, example }) => {
   )
 }
 
-const TestStory = () => {
+const Example = ({ example }) => {
+  if (example.type === 'function') {
+    return (
+      <FunctionExample 
+        name={example.name}
+        description={example.doc.desc}
+        parameters={example.doc.params}/>
+    )
+  }
+  return null
+}
+
+const TestExample = () => {
   return (
-    <Story 
+    <Example 
       name='Ndvi'
       description='Ndvi is very very awesome'
       example={() => {
@@ -42,4 +55,4 @@ const TestStory = () => {
   )
 }
 
-export default TestStory
+export default Example

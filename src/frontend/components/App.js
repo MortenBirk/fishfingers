@@ -5,10 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Sidebar from './Sidebar'
-import Story from './story/Story'
+import Story from './example/Example'
 import examples from '../../../doc/parsedJson'
-
-console.log(examples)
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +39,7 @@ const App = () => {
       <Sidebar examples={examples} selected={selected} setSelected={setSelected}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Story />
+        <Story example={examples[selected]}/>
       </main>
     </div>
   );
