@@ -73,8 +73,8 @@ const exportDeclaration = (node, result, comment) => {
 
 
 // The function used to parse the abstract syntax tree for a given example files source.
-const parseAst = (exampleFile) => {
-  const buffer = fs.readFileSync(exampleFile.replace('.example', '')).toString()
+const parseSourceAst = (exampleFilePath) => {
+  const buffer = fs.readFileSync(exampleFilePath).toString()
 
   const ast = babylon.parse(buffer, {allowImportExportEverywhere: true})
 
@@ -98,9 +98,7 @@ const parseAst = (exampleFile) => {
     ExportDefaultDeclaration: (path) => parse(exportDeclaration, path.node)
   })
   
-  console.log(result)
-  
-  fs.writeFile('doc/parsedJson.json', JSON.stringify(result, null, 4), 'utf8', () => {})
+  return result
 }
 
-module.exports = parseAst
+module.exports = parseSourceAst

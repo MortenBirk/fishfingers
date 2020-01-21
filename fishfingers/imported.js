@@ -1,0 +1,1 @@
+import { exported } from '../test/index'

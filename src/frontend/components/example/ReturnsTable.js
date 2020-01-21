@@ -11,40 +11,36 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 650,
   },
 });
 
-const ParameterTable = ( { parameters })  => {
+const ReturnsTable = ( { returns })  => {
 
   const classes = useStyles()
 
   return (
     <Fragment>
+
       <Typography  variant='h2' paragraph>
-        Parameters
+        Returns
       </Typography>
-      <TableContainer style={{marginBottom: 50}} component={Paper}>
+
+      <TableContainer style={{marginBottom: 50}}  component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
               <TableCell>Type</TableCell>
-              <TableCell>Default</TableCell>
               <TableCell>Description</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {parameters.map((param) => (
-              <TableRow key={param.name}>
-                <TableCell component="th" scope="row">
-                  {param.name}
-                </TableCell>
-                <TableCell>{param.valueType}</TableCell>
-                <TableCell></TableCell>
-                <TableCell>{param.desc}</TableCell>
-              </TableRow>
-            ))}
+            <TableRow>
+              <TableCell component="th" scope="row">
+                {returns.valueType}
+              </TableCell>
+              <TableCell>{returns.desc}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>    
@@ -52,4 +48,4 @@ const ParameterTable = ( { parameters })  => {
   )
 }
 
-export default ParameterTable
+export default ReturnsTable

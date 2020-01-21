@@ -10,7 +10,7 @@ import examples from '../../../doc/parsedJson'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: console.log(theme) ? 'flex': 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
