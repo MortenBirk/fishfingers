@@ -23,7 +23,14 @@
   * This is an object
   */
  const someObject = {
-   a: 5
+   /** 
+    * @type {number}
+    * This is the property a 
+    * */
+   a: 5,
+   b: 'Ok',
+   /** This is the property d */
+   d: () => 'lol'
  }
 
   /**
@@ -41,7 +48,7 @@
  /**
   * An awesome class
   */
- class MyClass {
+ export class MyClass {
    /**
     * Constructor
     */
@@ -50,10 +57,22 @@
    }
 
     /**
-    * Method
+    * A very good class method
+    * @param {string} ok a very ok string
+    * @returns {number}
     */
-   myClassMethod() {
+   myClassMethod(ok) {
     return 5
+   }
+
+       /**
+    * A very good class method
+    * @param {string} lolz a very lolz kind of string
+    * @param {string} ok a very ok string
+    * @returns {function}
+    */
+   mySecondClassMethod(lolz, ok) {
+    return () => 11
    }
  }
 

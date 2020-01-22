@@ -7,7 +7,6 @@ const parseComment = require('./commentParser')
 const parsedTypes = {
   class: 'class',
   function: 'function',
-  method: 'method',
   constructor: 'constructor',
   object: 'object',
   unknown: 'unknown'
@@ -18,12 +17,32 @@ const extractComment = (node) => {
 } 
 
 const variableDeclaration = (node, result, comment) => {
-  const name = node.declarations[0].id.name
   const type = node.declarations[0].init.type
-  result[name] = {
-    type: type === 'ArrowFunctionExpression' || type === 'FunctionExpression' ? parsedTypes.function : type === 'ObjectExpression' ? parsedTypes.object : parsedTypes.unknown,
-    name: name,
-    doc: parseComment(comment)
+
+  if (type === 'ArrowFunctionExpression' || type === 'FunctionExpression') {
+    functionDeclaration(node.declarations[0], result, comment)
+  }
+  else if (type === 'ObjectExpression') {
+    objectDeclaration(node.declarations[0], result, comment)
+  }
+  else {
+    const name = node.declarations[0].id.name
+    result[name] = {
+      type: parsedTypes.unknown,
+      name: name,
+      doc: parseComment(comment)
+    }
+  }
+
+
+}
+
+const objectDeclaration = (node, result, comment) => {
+  result[node.id.name] = {
+    type: parsedTypes.object,
+    name: node.id.name,
+    doc: parseComment(comment),
+    properties: {}
   }
 }
 
@@ -39,7 +58,7 @@ const classDeclaration = (node, result, comment) => {
   result[node.id.name] = {
     type: parsedTypes.class,
     name: node.id.name,
-    methods: {},
+    properties: {},
     doc: parseComment(comment)
   }
 }
@@ -53,11 +72,20 @@ const classMethod = (node, result, comment, path) => {
     }
   }
   if (path.node.kind === 'method') {
-    result[path.parentPath.parent.id.name].methods[path.node.key.name] = {
-      type: parsedTypes.method,
+    result[path.parentPath.parent.id.name].properties[path.node.key.name] = {
+      type: parsedTypes.function,
       name: path.node.key.name,
       doc: parseComment(comment)
     }
+  }
+}
+
+const objectProperty = (node, result, comment, path) => {
+  const doc = parseComment(comment)
+  result[path.parentPath.parent.id.name].properties[node.key.name] = {
+    type: doc.type || '',
+    name: node.key.name,
+    doc: doc
   }
 }
 
@@ -68,6 +96,10 @@ const exportDeclaration = (node, result, comment) => {
   }
   if (declaration.type === 'FunctionDeclaration') {
     functionDeclaration(declaration, result, comment)
+  }
+
+  if (declaration.type === 'ClassDeclaration') {
+    classDeclaration(declaration, result, comment)
   }
 }
 
@@ -94,6 +126,7 @@ const parseSourceAst = (exampleFilePath) => {
     FunctionDeclaration: (path) => parse(functionDeclaration, path.node),
     ClassDeclaration: (path) => parse(classDeclaration, path.node),
     ClassMethod: (path) => parse(classMethod, path.node, path),
+    ObjectProperty: (path) => parse(objectProperty, path.node, path),
     ExportNamedDeclaration: (path) => parse(exportDeclaration, path.node),
     ExportDefaultDeclaration: (path) => parse(exportDeclaration, path.node)
   })

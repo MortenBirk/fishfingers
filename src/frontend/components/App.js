@@ -4,13 +4,13 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Sidebar from './Sidebar'
-import Story from './example/Example'
+import Sidebar from './sidebar/Sidebar'
+import Example from './example/Example'
 import examples from '../../../doc/parsedJson'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: console.log(theme) ? 'flex': 'flex',
+    display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -26,6 +26,15 @@ const App = () => {
   const [selected, setSelected] = useState(Object.keys(examples)[0])
   const classes = useStyles();
 
+  const selectedExample = () => {
+    const selects = selected.split('.')
+    let res = examples[selects.shift()]
+    while (selects.length > 0) {
+      res = res.properties[selects.shift()]
+    }
+    return res
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -39,7 +48,7 @@ const App = () => {
       <Sidebar examples={examples} selected={selected} setSelected={setSelected}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Story example={examples[selected]}/>
+        <Example name={selected} example={selectedExample()}/>
       </main>
     </div>
   );

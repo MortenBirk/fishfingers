@@ -103,10 +103,20 @@ const parseExample = (exampleFilePath, sourceJson) => {
   generateExampleCode(examples, exampleFilePath)
 
   Object.entries(examples).forEach(([key, example]) => {
-    if (!sourceJson[example.id].examples) {
-      sourceJson[example.id].examples = []
+
+    const sourceEntry = (() => {
+      const entries = example.id.split('.')
+      let entry = sourceJson[entries.shift()]
+      while (entries.length > 0) {
+        entry = entry.properties[entries.shift()]
+      }
+      return entry
+    })()
+
+    if (!sourceEntry.examples) {
+      sourceEntry.examples = []
     }
-    sourceJson[example.id].examples.push({
+    sourceEntry.examples.push({
       title: example.title,
       description: example.desc,
       codeString: example.lines.join('\n'),

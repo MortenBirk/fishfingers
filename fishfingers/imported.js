@@ -1,1 +1,1 @@
-import { exported } from '../test/index'
+import { exported, MyClass } from '../test/index'

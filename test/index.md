@@ -30,3 +30,21 @@ console.log('This is also x ' + x)
 console.log('I just print something crazy')
 ```
 
+@id MyClass
+@desc This is documentation for MyClass
+
+```js
+const MyClass = require('./index').MyClass
+const instance = new MyClass()
+console.log(instance)
+```
+
+@id MyClass.myClassMethod
+@desc This is documentation for a method
+
+```js
+const MyClass = require('./index').MyClass
+const instance = new MyClass()
+console.log(instance.myClassMethod('OK'))
+
+```
