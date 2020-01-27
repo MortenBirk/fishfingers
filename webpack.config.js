@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
    entry: path.join(__dirname, 'src/frontend/index.js'),
+   performance: { hints: false },
    output: {
       path: path.join(__dirname, 'build/'),
       filename: 'index.js'

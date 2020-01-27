@@ -1,5 +1,5 @@
 {
-  "name": "awesome_documentation",
+  "name": "fishfingers",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -12,11 +12,9 @@
     "babel-loader": "^8.0.6",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^3.2.0",
-    "memory-fs": "^0.5.0",
     "prismjs": "^1.18.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "uuid": "^3.4.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
@@ -29,7 +27,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "build": "npm run parse && webpack --mode production",
     "parse": "node src/parsing/parse.js"
   },
   "author": "Morten Henriksen Birk",

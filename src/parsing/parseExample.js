@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-// This is very crude, and does not garantee to be unique. However for now it works ok
+// This is very crude, and does not guarantee to be unique. However for now it works ok
 const randomName = () => {
   const characters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n']
   const max = characters.length -1 

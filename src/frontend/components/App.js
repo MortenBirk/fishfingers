@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Sidebar from './sidebar/Sidebar'
 import Example from './example/Example'
 import examples from '../../../doc/parsedJson'
+import config from '../../../fishfingers/config'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +42,7 @@ const App = () => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            The Awesome Place
+            {config.title}
           </Typography>
         </Toolbar>
       </AppBar>
