@@ -29,7 +29,9 @@ module.exports = {
 ```
 
 ## imported.js
-This file should basically import everyhing that you are importing in the examples. This is a crude hack for now, and should probably not be needed in later versions. For instance the file could look like the following.
+This file should basically import everyhing that you are importing in the examples. This is a crude hack for now, and should probably not be needed in later versions. Every import must be relative to the `root` alias, which points to the root of your project.
+
+For instance the file could look like the following.
 ```js
 import { x, y, z } from 'root/someFolder/someFile'
 import something from 'root/anotherFile'
