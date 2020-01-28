@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Sidebar from './sidebar/Sidebar'
 import Example from './example/Example'
 import examples from '../../../doc/parsedJson'
-import config from '../../../fishfingers/config'
+import config from 'fishfingers/config'
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -90,9 +90,8 @@ const generateExampleCode = (examples, exampleFilePath) => {
     result.push('export function ' + key + '(){\n' + lines.join('\n') + '\n}')
   })
   result = result.join('\n')
-  // TODO: This is pure hardcoded and will not work, path should be extracted
-  result = fs.readFileSync(path.join(process.cwd(), '/fishfingers/imported.js')).toString() + '\n' + result
-  fs.writeFileSync("./doc/examples.js", result) 
+  result = fs.readFileSync('./fishfingers/imported.js').toString() + '\n' + result
+  fs.writeFile(path.join(__dirname, "../../doc/examples.js"), result, 'utf8', (err) => {err && console.log(err)}) 
 }
 
 
