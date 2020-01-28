@@ -1,3 +1,89 @@
+# What is this
+
+Fishfingers is a very simple (and early stage) documentation generator. It generates a simple and readable documentation from source code comments (currently a very limited subset of [JSDoc](https://github.com/jsdoc/jsdoc))
+
+It supports writing of very simple example files, which will be run directly in the browser, kind of like [Styleguidist](https://github.com/styleguidist/react-styleguidist) but for none ui libraries.
+
+# Installation and setup
+
+First install fishfingers
+
+`npm install --save-dev fishfingers`
+
+Create a fishfingers folder with the 2 config files
+
+```
+fishfingers/
+  config.js
+  imported.js
+```
+
+## config.js
+The config file defines where the source files are found, and where the documentation should be generated
+```js
+module.exports = {
+  title: 'Some title',
+  src: 'sourceCodeFolder/',
+  output: 'documentationFolder/'
+}
+```
+
+## imported.js
+This file should basically import everyhing that you are importing in the examples. This is a crude hack for now, and should probably not be needed in later versions. For instance the file could look like the following.
+```js
+import { x, y, z } from 'root/someFolder/someFile'
+import something from 'root/anotherFile'
+```
+
+# Writing documentation
+In your source code document elements with block comments.
+
+```js
+   /**
+    * Functions and class methods can be documented with a description, parameters and return values
+    * @param {number} b 
+    * @returns {number} The number plus 5
+    */
+   function someFunc(b) {
+    return b + 5
+   }
+```
+
+```js
+ /**
+  * Objects can be documented with property types
+  */
+ const someObject = {
+   /** 
+    * @type {number}
+    * This is the property a 
+    * */
+   a: 5,
+   /** This is the property d */
+   d: () => 'lol'
+ }
+```
+
+## Examples
+Examples can be added through markdown files. It is recomended to create examples in separate `.md` files next to the source code being documented
+
+An example is just a markdown file (which currently only uses markdown for editor highlighting). The structure however has to be very strict.
+
+Every example must start with a @id tag which is basically the name of the element to be documented. A title and description should also be added. Finally the example is added. Notice that imports are actually ignored, and must be provided in the `imported.js` config file.
+
+Here is an example of how `someFile.md` could be documented with examples.
+
+```
+@id something
+@title A good example
+@desc This is a very good example
+```js
+import { something } from './someFile'
+const x = something(10)
+console.log('This is x ' + x)
+```
+
+
 # Example Gotchas
 
 ## This is not real MarkDown
