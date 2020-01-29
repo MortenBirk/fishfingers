@@ -57,6 +57,27 @@
    }
 
     /**
+    * A class prop method
+    * @returns {null}
+    */    
+   classPropMethod = () => {console.log(ok)}
+
+    /**
+    * A class prop other
+    * @type {string}
+    */    
+   classPropOther = 'HELLO'
+
+    /**
+      * This is a class prop object
+      * @type {object}
+      */
+    someClassPropObject = {
+      a: 10,
+      d: () => 'lol'
+    }
+
+    /**
     * A very good class method
     * @param {string} ok a very ok string
     * @returns {number}
@@ -65,7 +86,7 @@
     return 5
    }
 
-       /**
+    /**
     * A very good class method
     * @param {string} lolz a very lolz kind of string
     * @param {string} ok a very ok string

@@ -33,8 +33,6 @@ const variableDeclaration = (node, result, comment) => {
       doc: parseComment(comment)
     }
   }
-
-
 }
 
 const objectDeclaration = (node, result, comment) => {
@@ -80,7 +78,28 @@ const classMethod = (node, result, comment, path) => {
   }
 }
 
+const classProperty = (node, result, comment, path) => {
+  const doc = parseComment(comment)
+  if (node.value.type === 'ArrowFunctionExpression' || node.value.type === 'FunctionExpression') {
+    result[path.parentPath.parent.id.name].properties[path.node.key.name] = {
+      type: parsedTypes.function,
+      name: node.key.name,
+      doc: doc
+    }
+  }
+  else {
+    result[path.parentPath.parent.id.name].properties[path.node.key.name] = {
+      type: doc.type || parsedTypes.unknown,
+      name: node.key.name,
+      doc: doc
+    }
+  }
+}
+
 const objectProperty = (node, result, comment, path) => {
+  if (!path.parentPath.parent.id) {
+    return
+  }
   const doc = parseComment(comment)
   result[path.parentPath.parent.id.name].properties[node.key.name] = {
     type: doc.type || '',
@@ -108,7 +127,7 @@ const exportDeclaration = (node, result, comment) => {
 const parseSourceAst = (exampleFilePath) => {
   const buffer = fs.readFileSync(exampleFilePath).toString()
 
-  const ast = babylon.parse(buffer, {allowImportExportEverywhere: true})
+  const ast = babylon.parse(buffer, {allowImportExportEverywhere: true, plugins: ['classProperties']})
 
   
   const result = {}
@@ -126,6 +145,7 @@ const parseSourceAst = (exampleFilePath) => {
     FunctionDeclaration: (path) => parse(functionDeclaration, path.node),
     ClassDeclaration: (path) => parse(classDeclaration, path.node),
     ClassMethod: (path) => parse(classMethod, path.node, path),
+    ClassProperty: (path) => parse(classProperty, path.node, path),
     ObjectProperty: (path) => parse(objectProperty, path.node, path),
     ExportNamedDeclaration: (path) => parse(exportDeclaration, path.node),
     ExportDefaultDeclaration: (path) => parse(exportDeclaration, path.node)

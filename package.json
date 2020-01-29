@@ -1,6 +1,6 @@
 {
   "name": "fishfingers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Documentation Generator",
   "repository": {
     "type": "git",
@@ -9,28 +9,34 @@
   "bin": "fishfingers.js",
   "dependencies": {
     "@babel/core": "^7.7.7",
+    "@babel/parser": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
+    "@babel/traverse": "^7.7.4",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
     "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.1",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^3.2.0",
     "prismjs": "^1.18.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "style-loader": "^1.1.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1",
-    "@babel/parser": "^7.7.7",
-    "@babel/traverse": "^7.7.4",
-    "css-loader": "^3.4.1",
-    "style-loader": "^1.1.2"
+    "webpack-dev-server": "^3.10.1"
+  },
+  "babel": {
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": ["@babel/plugin-proposal-class-properties"]
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "npm run parse && webpack --mode production",
-    "parse": "node src/parsing/parse.js"
+    "parse": "node src/parsing/parse.js",
+    "fish": "node fishfingers"
   },
   "author": "Morten Henriksen Birk",
   "license": "MIT"

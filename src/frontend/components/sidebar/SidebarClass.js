@@ -33,7 +33,7 @@ const SidebarClass = ( { parentName, properties, selected, setSelected } ) => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {Object.entries(properties).map(([name, value]) => (
+          {Object.entries(properties).map(([name, value]) => value.type === 'function' && (
             <ListItem 
               button 
               key={name} 
