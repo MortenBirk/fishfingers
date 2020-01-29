@@ -98,7 +98,7 @@ It is required with an id before every example, not just before a bunch of examp
 
 ## Imports
 
-Multi line imports or requires will preak examples
+Multi line imports or requires will break examples
 
 *This can be fixed quite fast*
 
