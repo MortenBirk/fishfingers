@@ -41,7 +41,7 @@ const ParameterTable = ( { parameters })  => {
                   {param.name}
                 </TableCell>
                 <TableCell>{param.valueType}</TableCell>
-                <TableCell></TableCell>
+                <TableCell>{param.default || 'required'}</TableCell>
                 <TableCell>{param.desc}</TableCell>
               </TableRow>
             ))}

@@ -79,7 +79,7 @@
 
     /**
     * A very good class method
-    * @param {string} ok a very ok string
+    * @param {string} [ok] a very ok string
     * @returns {number}
     */
    myClassMethod(ok) {
@@ -88,8 +88,8 @@
 
     /**
     * A very good class method
-    * @param {string} lolz a very lolz kind of string
-    * @param {string} ok a very ok string
+    * @param {string} [lolz = 5] a very lolz kind of string
+    * @param {string} [ok] a very ok string
     * @returns {function}
     */
    mySecondClassMethod(lolz, ok) {

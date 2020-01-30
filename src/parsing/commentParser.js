@@ -38,7 +38,20 @@ const parseParam = (line) => {
   // If a name is provided eat it
   line = line.trim()
   if (line !== '') {
-    if (line.includes(' ')) {
+    // If it is optional or has a default, eat that
+    if (line.match(/\[.*\].*/)) {
+      if (line.match(/\[.*=.*\].*/)) {
+        result.name = line.substring(line.indexOf('[') + 1, line.indexOf('=')).trim()
+        result.default = line.substring(line.indexOf('=') + 1, line.indexOf(']'))
+      }
+      else {
+        result.name = line.substring(line.indexOf('[') + 1, line.indexOf(']')).trim()
+        result.default = 'optional'
+      }
+      line = line.substring(line.indexOf(']') + 1)
+    }
+    // Or just eat the name
+    else if (line.includes(' ')) {
       result.name = line.substr(0, line.indexOf(' '));
       line = line.substring(line.indexOf(' ') + 1)
     } else {
