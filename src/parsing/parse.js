@@ -1,6 +1,6 @@
 const glob = require('glob')
 const parseSourceAst = require('./parseSourceAst')
-const parseExample = require('./parseExample')
+const parseExamples = require('./parseExample')
 const fs = require('fs')
 const path = require('path')
 const config = require(path.join(process.cwd(), '/fishfingers/config'))
@@ -20,7 +20,8 @@ const parse = () => {
   const exampleFiles = glob.sync(
     path.join(process.cwd().replace('\\', '/'), config.src ,'/**/*.md')
   )
-  exampleFiles.forEach(exampleFilePath => parseExample(exampleFilePath, sourceDoc)) 
+  parseExamples(exampleFiles, sourceDoc)
+  
 
   // Finally write the parsed file to disc
   fs.writeFile(path.join(__dirname, '../../doc/parsedJson.json'), JSON.stringify(sourceDoc, null, 4), 'utf8', (err) => {err && console.log(err)})

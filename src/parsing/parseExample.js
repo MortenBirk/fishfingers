@@ -74,7 +74,7 @@ const parseMarkdown = (mdString) => {
   return result
 }
 
-const generateExampleCode = (examples, exampleFilePath) => {
+const generateExampleCode = (examples) => {
   let result = []
   Object.entries(examples).forEach(([key, example]) => {
     const lines = []
@@ -90,8 +90,7 @@ const generateExampleCode = (examples, exampleFilePath) => {
     result.push('export function ' + key + '(){\n' + lines.join('\n') + '\n}')
   })
   result = result.join('\n')
-  result = fs.readFileSync('./fishfingers/imported.js').toString() + '\n' + result
-  fs.writeFile(path.join(__dirname, "../../doc/examples.js"), result, 'utf8', (err) => {err && console.log(err)}) 
+  return result
 }
 
 
@@ -99,7 +98,7 @@ const parseExample = (exampleFilePath, sourceJson) => {
   const buffer = fs.readFileSync(exampleFilePath).toString()
   const examples = parseMarkdown(buffer)
   
-  generateExampleCode(examples, exampleFilePath)
+  const codeString = generateExampleCode(examples)
 
   Object.entries(examples).forEach(([key, example]) => {
 
@@ -122,6 +121,14 @@ const parseExample = (exampleFilePath, sourceJson) => {
       codeName: key
     })
   })
+
+  return codeString
 }
 
-module.exports = parseExample
+const parseExamples = (exampleFiles, sourceDoc) => {
+  let codeString = exampleFiles.map(exampleFilePath => parseExample(exampleFilePath, sourceDoc)) .join('\n')
+  codeString = fs.readFileSync('./fishfingers/imported.js').toString() + '\n' + codeString
+  fs.writeFile(path.join(__dirname, "../../doc/examples.js"), codeString, 'utf8', (err) => {err && console.log(err)}) 
+}
+
+module.exports = parseExamples

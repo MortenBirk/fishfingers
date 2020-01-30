@@ -6,14 +6,16 @@ import * as exampleCode from '../../../../doc/examples'
 
 const hijackedLog = (toRun) => {
   const loggedLines = []
+  const oldConsoleLog = window.console.log
   try {
-    const oldConsoleLog = window.console.log
     window.console.log = (text) => loggedLines.push(text + '\n')
     toRun()
     window.console.log = oldConsoleLog
   }
-  catch {
+  catch (err) {
     console.log('Example failed to run')
+    window.console.log = oldConsoleLog
+    console.log(err.message)
   }
   return (
     <Paper>
