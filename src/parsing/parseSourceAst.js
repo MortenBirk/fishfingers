@@ -13,7 +13,7 @@ const parsedTypes = {
 }
 
 const extractComment = (node) => {
-  return node.leadingComments && node.leadingComments[node.leadingComments.length - 1].value
+  return node.leadingComments && node.leadingComments[node.leadingComments.length - 1].type === 'CommentBlock' && node.leadingComments[node.leadingComments.length - 1].value
 } 
 
 const variableDeclaration = (node, result, comment) => {
