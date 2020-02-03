@@ -47,6 +47,9 @@
 
  /**
   * An awesome class
+  * 
+  * It can do something,
+  * and it has properties
   */
  export class MyClass {
    /**

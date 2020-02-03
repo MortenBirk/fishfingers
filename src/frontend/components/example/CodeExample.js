@@ -29,8 +29,6 @@ const hijackedLog = (toRun) => {
 }
 
 const CodeExample = ( {codeExample } ) => {
-
-  useEffect(() => Prism.highlightAll(), [])
   
   return (
     <Fragment>

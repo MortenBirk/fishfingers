@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 import Typography from '@material-ui/core/Typography'
-import ReturnsTable from './ReturnsTable'
 import PropertiesTable from './PropertiesTable'
-import CodeExamples from './CodeExamples'
 
 const ObjectExample = ({ objectExample }) => {
   return (
@@ -11,9 +9,7 @@ const ObjectExample = ({ objectExample }) => {
         {objectExample.name}
       </Typography>
 
-      <Typography paragraph>
-        {objectExample.doc.desc}
-      </Typography>
+      {objectExample.doc.desc && objectExample.doc.desc.split('\n').map(e => <Typography paragraph>{e}</Typography>)}
 
       <PropertiesTable properties={objectExample.properties}/>
 

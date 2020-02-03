@@ -14,7 +14,7 @@ const HighlightedCode = ( { codeString } ) => {
   
   return (
     <pre>
-      <code className="language-javascript">
+      <code className="language-javascript" ref={codeRef}>
         {codeString}
       </code>
     </pre>

@@ -11,9 +11,7 @@ const FunctionExample = ({ name, description, parameters, returns, codeExamples 
         {name}( )
       </Typography>
 
-      <Typography paragraph>
-        {description}
-      </Typography>
+      {description && description.split('\n').map(e => <Typography paragraph>{e}</Typography>)}
 
       <ParameterTable parameters={parameters}/>
 
