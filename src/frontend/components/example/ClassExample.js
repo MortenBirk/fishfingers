@@ -10,7 +10,7 @@ const ClassExample = ({ classExample }) => {
         {classExample.name}
       </Typography>
 
-      {classExample.doc.desc && classExample.doc.desc.split('\n').map(e => <Typography paragraph>{e}</Typography>)}
+      {classExample.doc.desc && classExample.doc.desc.split('\n').map((e, idx) => <Typography key={idx} paragraph>{e}</Typography>)}
 
       <PropertiesTable properties={classExample.properties}/>
 

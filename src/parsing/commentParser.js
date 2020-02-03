@@ -4,7 +4,8 @@ const commentTypes = {
   desc: 'desc',
   param: 'param',
   returns: 'returns',
-  type: 'type'
+  type: 'type',
+  category: 'category'
 }
 
 const parseDesc = (line) => {
@@ -109,9 +110,21 @@ const parseType = (line) => {
   return result
 }
 
+const parseCategory = (line) => {
+  const result = {
+    type: commentTypes.category,
+  }
+
+  // Remove the everything before and including @returns
+  line = line.substring(line.indexOf('@category')+9)
+
+  result.category = line.trim()
+  return result
+}
+
 const parseLine = (line) => {
   // Figure out what kind of line this is and parse it
-  const match = line.match(/(@param|@returns|@type)/)
+  const match = line.match(/(@param|@returns|@type|@category)/)
   if (!match) {
     return parseDesc(line)
   }
@@ -123,6 +136,9 @@ const parseLine = (line) => {
   }
   if (match[0] === '@type') {
     return parseType(line)
+  }
+  if (match[0] === '@category') {
+    return parseCategory(line)
   }
 }
 
@@ -154,6 +170,10 @@ const parseComment = (comment) => {
 
     if (parsed.type === commentTypes.type) {
       result.type = parsed.valueType
+    }
+
+    if (parsed.type === commentTypes.category) {
+      result.category = parsed.category
     }
 
   })

@@ -9,7 +9,7 @@ const ObjectExample = ({ objectExample }) => {
         {objectExample.name}
       </Typography>
 
-      {objectExample.doc.desc && objectExample.doc.desc.split('\n').map(e => <Typography paragraph>{e}</Typography>)}
+      {objectExample.doc.desc && objectExample.doc.desc.split('\n').map((e, idx) => <Typography key={idx} paragraph>{e}</Typography>)}
 
       <PropertiesTable properties={objectExample.properties}/>
 

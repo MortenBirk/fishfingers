@@ -105,6 +105,9 @@
 * Hi I am exported
 * 
 * I am a named exported constant
+*
+* And i have a category
+* @category Cool Functions
 * @param {number} lol This is lol
 * @returns {string} Awesome
 */
@@ -127,7 +130,17 @@ export function exportedFunc(lolz) {
 
 /**
  * This is default exported
+ * 
+ * And it has a category
+ * @category Cool Functions
  */
 export default function ok() {
+  return 'ok'
+}
+
+/**
+ * @category Lame functions
+ */
+const cat = () => {
   return 'ok'
 }
