@@ -41,6 +41,12 @@ const parseCategories = (examples) => {
     }
   )
 
+  Object.entries(result).forEach(([key, val]) => {
+    if (Object.values(val).length === 0) {
+      delete result[key]
+    }
+  })
+
 
 
   return result
